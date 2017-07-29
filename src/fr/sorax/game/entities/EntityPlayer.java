@@ -33,6 +33,7 @@ public class EntityPlayer extends Entity {
 	@Override
 	public void update() {
 		super.update();
+		
 		if(Game.INPUT.isKeyDown(KeyEvent.VK_UP)) {
 			this.direction = 2;
 			this.move(0, -1);

@@ -149,7 +149,7 @@ public class Level {
 			e.update();
 			if(new AABB(e.getBox(), player.getBox()).intersect()) {
 				if(e instanceof EntityMob) {					
-					System.out.println("player is collided with " + e);
+					this.player.setLife(0);
 				} else if(e instanceof EntityBattery) {
 					((EntityBattery) e).heal(player, 10 + Constants.random.nextInt(20));
 					removedList.add(e);

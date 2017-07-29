@@ -1,5 +1,7 @@
 package fr.sorax.game.entities;
 
+import java.awt.Container;
+
 import fr.sorax.game.entities.ai.Rail;
 import fr.sorax.game.gfx.Art;
 import fr.sorax.game.gfx.Screen;
@@ -80,7 +82,7 @@ public class EntityMob extends Entity {
 			this.currentRail = this.targetNextRail ? this.currentRail.getNextRail() : this.currentRail.getPredRail();
 			
 		if(this.detectPlayer()) {
-			System.out.println("Player detected");
+			if(Constants.random.nextFloat() <= 0.2) this.level.getPlayer().removeLife(1);
 		}
 	}
 	
