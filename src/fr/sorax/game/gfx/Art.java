@@ -13,6 +13,7 @@ public class Art {
 	public static final Bitmap title = load("/gui/title.png");
 	public static final Bitmap enter = load("/gui/enter.png");
 	public static final Bitmap move = load("/gui/move.png");
+	public static final Bitmap win = load("/gui/win.png");
 	
 	public static final Bitmap[][] player = cut("/entities/player.png", 16, 16);
 	public static final Bitmap[][] tiles = cut("/levels/tiles.png", 16, 16);

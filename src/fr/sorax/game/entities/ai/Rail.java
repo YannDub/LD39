@@ -42,7 +42,7 @@ public class Rail {
 	}
 	
 	public int getWorldY() {
-		return this.y * Constants.TILESIZE;
+		return this.y * Constants.TILESIZE - 4;
 	}
 	
 	public static boolean goodColor(int color) {

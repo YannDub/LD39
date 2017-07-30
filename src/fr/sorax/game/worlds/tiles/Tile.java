@@ -11,6 +11,7 @@ public class Tile {
 	public static final Tile wall = new CollidedTile(0xffffffff);
 	public static final Tile destructable = new DestructableTile();
 	public static final Tile floor = new FloorTile();
+	public static final Tile end = new EndTile();
 	
 	public static final HashMap<Integer, Tile> tiles = new HashMap<Integer, Tile>() {
 		private static final long serialVersionUID = 1L;
@@ -24,6 +25,9 @@ public class Tile {
 		
 		for(int c : destructable.color)
 			put(c, destructable);
+		
+		for(int c : end.color)
+			put(c, end);
 	}
 	};
 	

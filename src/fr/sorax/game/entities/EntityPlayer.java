@@ -3,10 +3,10 @@ package fr.sorax.game.entities;
 import java.awt.event.KeyEvent;
 
 import fr.sorax.game.Game;
+import fr.sorax.game.audio.Sound;
 import fr.sorax.game.gfx.Art;
 import fr.sorax.game.gfx.Screen;
-import fr.sorax.game.physics.AABB;
-import fr.sorax.game.physics.Box;
+import fr.sorax.game.scene.WinScene;
 import fr.sorax.game.utils.Constants;
 import fr.sorax.game.worlds.Level;
 import fr.sorax.game.worlds.tiles.Tile;
@@ -42,15 +42,28 @@ public class EntityPlayer extends Entity {
 			if(level.getTile(x / Constants.TILESIZE, (y / Constants.TILESIZE) + 2) == Tile.destructable && Game.INPUT.isKeyDown(KeyEvent.VK_SPACE)) {
 				level.setTile(Tile.floor, x / Constants.TILESIZE, (y / Constants.TILESIZE) + 2);
 				level.removeMask(x / Constants.TILESIZE, (y / Constants.TILESIZE) + 2);
+				this.removeLife(10);
+				Sound.destroy.play();
 			} else if(level.getTile(x / Constants.TILESIZE, y / Constants.TILESIZE) == Tile.destructable && Game.INPUT.isKeyDown(KeyEvent.VK_SPACE)) {
 				level.setTile(Tile.floor, x / Constants.TILESIZE, y / Constants.TILESIZE);
 				level.removeMask(x / Constants.TILESIZE, y / Constants.TILESIZE);
+				Sound.destroy.play();
+				this.removeLife(10);
 			} else if(level.getTile(x / Constants.TILESIZE + 4, y / Constants.TILESIZE + 1) == Tile.destructable && Game.INPUT.isKeyDown(KeyEvent.VK_SPACE)) {
 				level.setTile(Tile.floor, x / Constants.TILESIZE + 4, y / Constants.TILESIZE + 1);
 				level.removeMask(x / Constants.TILESIZE + 4, y / Constants.TILESIZE + 1);
+				this.removeLife(10);
+				Sound.destroy.play();
 			} else if(level.getTile(x / Constants.TILESIZE + 1, y / Constants.TILESIZE + 1) == Tile.destructable && Game.INPUT.isKeyDown(KeyEvent.VK_SPACE)) {
 				level.setTile(Tile.floor, x / Constants.TILESIZE + 1, y / Constants.TILESIZE + 1);
 				level.removeMask(x / Constants.TILESIZE + 1, y / Constants.TILESIZE + 1);
+				this.removeLife(10);
+				Sound.destroy.play();
+			}
+			
+			if(level.getTile(x / Constants.TILESIZE, y / Constants.TILESIZE + 1) == Tile.end) {
+				Game.goToScene(new WinScene());
+				return;
 			}
 
 			if(Game.INPUT.isKeyDown(KeyEvent.VK_UP)) {

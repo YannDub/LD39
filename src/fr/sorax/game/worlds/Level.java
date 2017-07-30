@@ -9,6 +9,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import fr.sorax.game.Game;
+import fr.sorax.game.audio.Sound;
 import fr.sorax.game.entities.Entity;
 import fr.sorax.game.entities.EntityBattery;
 import fr.sorax.game.entities.EntityMob;
@@ -150,8 +151,10 @@ public class Level {
 			if(new AABB(e.getBox(), player.getBox()).intersect()) {
 				if(e instanceof EntityMob) {					
 					this.player.setLife(0);
+					Sound.death.play();
 				} else if(e instanceof EntityBattery) {
 					((EntityBattery) e).heal(player, 10 + Constants.random.nextInt(20));
+					Sound.battery.play();
 					removedList.add(e);
 				}
 			}

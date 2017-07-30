@@ -66,13 +66,13 @@ public class EntityMob extends Entity {
 			this.visionBox = new Box(x - Constants.TILESIZE, y + Constants.TILESIZE, 3 * Constants.TILESIZE, 3 * Constants.TILESIZE);
 			break;
 		case 1:
-			this.visionBox = new Box(x + Constants.TILESIZE, y - Constants.TILESIZE, 3 * Constants.TILESIZE, 3 * Constants.TILESIZE);
+			this.visionBox = new Box(x - 3 * Constants.TILESIZE, y - Constants.TILESIZE, 3 * Constants.TILESIZE, 3 * Constants.TILESIZE);
 			break;
 		case 2:
 			this.visionBox = new Box(x - Constants.TILESIZE, y - 3 * Constants.TILESIZE, 3 * Constants.TILESIZE, 3 * Constants.TILESIZE);
 			break;
 		case 3:
-			this.visionBox = new Box(x - 3 * Constants.TILESIZE, y - Constants.TILESIZE, 3 * Constants.TILESIZE, 3 * Constants.TILESIZE);
+			this.visionBox = new Box(x + Constants.TILESIZE, y - Constants.TILESIZE, 3 * Constants.TILESIZE, 3 * Constants.TILESIZE);
 			break;
 		}
 		
