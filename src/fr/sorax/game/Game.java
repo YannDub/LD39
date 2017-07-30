@@ -8,7 +8,7 @@ import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 
 import fr.sorax.game.gfx.Screen;
-import fr.sorax.game.scene.GameScene;
+import fr.sorax.game.scene.MainScene;
 import fr.sorax.game.scene.Scene;
 import fr.sorax.game.utils.Input;
 
@@ -30,11 +30,11 @@ public class Game extends Canvas implements Runnable{
 	private boolean running;
 	
 	private Screen screen;
-	private Scene scene;
+	private static Scene scene;
 	
 	public Game() {
 		this.screen = new Screen(WIDTH / SCALE, HEIGHT / SCALE);
-		this.scene = new GameScene();
+		scene = new MainScene();
 	}
 	
 	private void init() {
@@ -103,7 +103,7 @@ public class Game extends Canvas implements Runnable{
 		}
 		
 		this.screen.fill(0xff000000);
-		this.scene.render(screen);
+		scene.render(screen);
 		
 		Graphics g = bs.getDrawGraphics();
 		g.fillRect(0, 0, WIDTH / SCALE, HEIGHT / SCALE);
@@ -114,7 +114,11 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	private void update() {
-		this.scene.update();
+		scene.update();
+	}
+	
+	public static void goToScene(Scene scene) {
+		Game.scene = scene;
 	}
 	
 	public static void main(String[] args) {

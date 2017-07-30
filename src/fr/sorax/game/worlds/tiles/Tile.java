@@ -9,6 +9,7 @@ import fr.sorax.game.worlds.Level;
 public class Tile {
 	
 	public static final Tile wall = new CollidedTile(0xffffffff);
+	public static final Tile destructable = new DestructableTile();
 	public static final Tile floor = new FloorTile();
 	
 	public static final HashMap<Integer, Tile> tiles = new HashMap<Integer, Tile>() {
@@ -20,6 +21,9 @@ public class Tile {
 		
 		for(int c : floor.color)
 			put(c, floor);
+		
+		for(int c : destructable.color)
+			put(c, destructable);
 	}
 	};
 	

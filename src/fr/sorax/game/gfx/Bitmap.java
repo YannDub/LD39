@@ -41,12 +41,20 @@ public class Bitmap {
 				
 				if(x < 0) continue;
 				if(y < 0) break;
-				if(x >= width) break;
-				if(y >= height) break;
+				if(x >= width / 2 + 10) break;
+				if(y >= height / 2 + 10) break;
 				
 				if(bitmap.pixels[i + j * bitmap.width] != 0xffFF00DC)
 					this.pixels[x + y * width] = bitmap.pixels[i + j * bitmap.width];
 			}
 		}
+	}
+	
+	public int getWidth() {
+		return this.width;
+	}
+	
+	public int getHeight() {
+		return this.height;
 	}
 }

@@ -11,23 +11,27 @@ public class CollidedTile extends Tile {
 	}
 	
 	public void render(Screen screen, Level level, int x, int y) {
+		this.autoTile(screen, level, x, y, 1, 2);
+	}
+	
+	protected void autoTile(Screen screen, Level level, int x, int y, int xTile, int yTile) {
 		Tile l = level.getTile(x - 1, y);
 		Tile r = level.getTile(x + 1, y);
 		Tile u = level.getTile(x, y - 1);
 		Tile d = level.getTile(x, y + 1);
 		
-		if(u == Tile.wall && d == Tile.wall)
-			screen.drawTile(x, y, Art.tiles[0][2]);
-		else if(l == Tile.wall && r == Tile.wall)
-			screen.drawTile(x, y, Art.tiles[1][1]);
-		else if(d == Tile.wall && r == Tile.wall)
-			screen.drawTile(x, y, Art.tiles[0][1]);
-		else if(l == Tile.wall && u == Tile.wall)
-			screen.drawTile(x, y, Art.tiles[2][3]);
-		else if(r == Tile.wall && u == Tile.wall)
-			screen.drawTile(x, y, Art.tiles[0][3]);
+		if(u instanceof CollidedTile && d instanceof CollidedTile)
+			screen.drawTile(x, y, Art.tiles[xTile - 1][yTile]);
+		else if(l instanceof CollidedTile && r instanceof CollidedTile)
+			screen.drawTile(x, y, Art.tiles[xTile][yTile - 1]);
+		else if(d instanceof CollidedTile && r instanceof CollidedTile)
+			screen.drawTile(x, y, Art.tiles[xTile - 1][yTile - 1]);
+		else if(l instanceof CollidedTile && u instanceof CollidedTile)
+			screen.drawTile(x, y, Art.tiles[xTile + 1][yTile + 1]);
+		else if(r instanceof CollidedTile && u instanceof CollidedTile)
+			screen.drawTile(x, y, Art.tiles[xTile - 1][yTile + 1]);
 		else
-			screen.drawTile(x, y, Art.tiles[2][1]);
+			screen.drawTile(x, y, Art.tiles[xTile + 1][yTile - 1]);
 	}
 
 }

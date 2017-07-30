@@ -5,7 +5,11 @@ import java.awt.event.KeyEvent;
 import fr.sorax.game.Game;
 import fr.sorax.game.gfx.Art;
 import fr.sorax.game.gfx.Screen;
+import fr.sorax.game.physics.AABB;
+import fr.sorax.game.physics.Box;
+import fr.sorax.game.utils.Constants;
 import fr.sorax.game.worlds.Level;
+import fr.sorax.game.worlds.tiles.Tile;
 
 public class EntityPlayer extends Entity {
 	
@@ -34,25 +38,42 @@ public class EntityPlayer extends Entity {
 	public void update() {
 		super.update();
 		
-		if(Game.INPUT.isKeyDown(KeyEvent.VK_UP)) {
-			this.direction = 2;
-			this.move(0, -1);
+		if(this.life > 0) {
+			if(level.getTile(x / Constants.TILESIZE, (y / Constants.TILESIZE) + 2) == Tile.destructable && Game.INPUT.isKeyDown(KeyEvent.VK_SPACE)) {
+				level.setTile(Tile.floor, x / Constants.TILESIZE, (y / Constants.TILESIZE) + 2);
+				level.removeMask(x / Constants.TILESIZE, (y / Constants.TILESIZE) + 2);
+			} else if(level.getTile(x / Constants.TILESIZE, y / Constants.TILESIZE) == Tile.destructable && Game.INPUT.isKeyDown(KeyEvent.VK_SPACE)) {
+				level.setTile(Tile.floor, x / Constants.TILESIZE, y / Constants.TILESIZE);
+				level.removeMask(x / Constants.TILESIZE, y / Constants.TILESIZE);
+			} else if(level.getTile(x / Constants.TILESIZE + 4, y / Constants.TILESIZE + 1) == Tile.destructable && Game.INPUT.isKeyDown(KeyEvent.VK_SPACE)) {
+				level.setTile(Tile.floor, x / Constants.TILESIZE + 4, y / Constants.TILESIZE + 1);
+				level.removeMask(x / Constants.TILESIZE + 4, y / Constants.TILESIZE + 1);
+			} else if(level.getTile(x / Constants.TILESIZE + 1, y / Constants.TILESIZE + 1) == Tile.destructable && Game.INPUT.isKeyDown(KeyEvent.VK_SPACE)) {
+				level.setTile(Tile.floor, x / Constants.TILESIZE + 1, y / Constants.TILESIZE + 1);
+				level.removeMask(x / Constants.TILESIZE + 1, y / Constants.TILESIZE + 1);
+			}
+
+			if(Game.INPUT.isKeyDown(KeyEvent.VK_UP)) {
+				this.direction = 2;
+				this.move(0, -1);
+			}
+			if(Game.INPUT.isKeyDown(KeyEvent.VK_DOWN)) {
+				this.direction = 0;
+				this.move(0, 1);
+			}
+			if(Game.INPUT.isKeyDown(KeyEvent.VK_LEFT)) {
+				this.direction = 1;
+				this.move(-1, 0);
+			}
+			if(Game.INPUT.isKeyDown(KeyEvent.VK_RIGHT)) {
+				this.direction = 3;
+				this.move(1, 0);
+			}
+			
+			if(this.tick % 180 == 0)
+				this.removeLife(1);
+			
 		}
-		if(Game.INPUT.isKeyDown(KeyEvent.VK_DOWN)) {
-			this.direction = 0;
-			this.move(0, 1);
-		}
-		if(Game.INPUT.isKeyDown(KeyEvent.VK_LEFT)) {
-			this.direction = 1;
-			this.move(-1, 0);
-		}
-		if(Game.INPUT.isKeyDown(KeyEvent.VK_RIGHT)) {
-			this.direction = 3;
-			this.move(1, 0);
-		}
-		
-		if(this.tick % 180 == 0)
-			this.removeLife(1);
 	}
 	
 	public void setLife(int life) {

@@ -70,7 +70,7 @@ public class Level {
 					else
 						this.tiles[x + y * width] = new Tile(pixel);
 					
-					if(this.tiles[x + y * width].equals(Tile.wall)) {
+					if(this.tiles[x + y * width] instanceof CollidedTile) {
 						Box b = new Box(x * Constants.TILESIZE, y * Constants.TILESIZE, Constants.TILESIZE, Constants.TILESIZE);
 						this.mask.add(b);
 					}
@@ -174,6 +174,19 @@ public class Level {
 	
 	public List<Box> getMask() {
 		return this.mask;
+	}
+	
+	public void removeMask(int x, int y) {
+		for(Box b : this.mask) {
+			if(b.getX() == x * Constants.TILESIZE && b.getY() == y * Constants.TILESIZE) {
+				this.mask.remove(b);
+				return;
+			}
+		}
+	}
+	
+	public void setTile(Tile tile, int x, int y) {
+		this.tiles[x + y * width] = tile;
 	}
 	
 	public Tile getTile(int x, int y) {

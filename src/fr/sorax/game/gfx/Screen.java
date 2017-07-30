@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
 import fr.sorax.game.utils.Constants;
-import fr.sorax.game.worlds.tiles.Tile;
 
 public class Screen extends Bitmap{
 	
@@ -25,6 +24,10 @@ public class Screen extends Bitmap{
 	
 	public void drawBitmap(int x, int y, Bitmap bitmap) {
 		super.drawBitmap(x + xOffset, y + yOffset, bitmap);
+	}
+	
+	public void drawImage(int x, int y, Bitmap bitmap) {
+		super.drawBitmap(x, y, bitmap);
 	}
 	
 	public void drawTile(int x, int y, Bitmap bitmap) {

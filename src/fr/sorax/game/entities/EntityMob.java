@@ -1,7 +1,5 @@
 package fr.sorax.game.entities;
 
-import java.awt.Container;
-
 import fr.sorax.game.entities.ai.Rail;
 import fr.sorax.game.gfx.Art;
 import fr.sorax.game.gfx.Screen;
